@@ -39,10 +39,13 @@ class Consumer:
 
     def record_data(self, data):
         url = 'http://microserviceapi:8000/api/measures/'
-
-        req = requests.post(url=url, data=data, timeout=60, verify=False)
-        print(req.status_code)
-        if req.status_code != 201:
-            print('ERROR AL REGISTRAR MEDICION: {}'.format(req.text))
-        else:
-            print('Registro almanenado correctamente: {}'.format(req.text))
+        try:
+            req = requests.post(url=url, data=data, timeout=60, verify=False)
+            print(req.status_code)
+            if req.status_code != 201:
+                print('ERROR AL REGISTRAR MEDICION: {}'.format(req.text))
+            else:
+                print('Registro almanenado correctamente: {}'.format(req.text))
+        except Exception as e:
+            print('No fue posible establecer conexión con el servicio externo: {}'.format(str(e)))
+            pass
