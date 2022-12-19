@@ -1,0 +1,16 @@
+# docker-compose.yml
+
+version: "3.4"
+services:
+  consumer_service:
+    image: consumer_1
+    container_name: rmsystem_consumer
+    environment:
+      - REDIS_HOSTNAME=redislocal
+      - REDIS_PORT=6379
+    networks:
+      - local-dev
+
+networks:
+  local-dev:
+    external: true
